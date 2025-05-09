@@ -1,4 +1,4 @@
-# Flask To-Do List Application
+# To-Do List Application
 
 A simple, responsive to-do list application built with Flask and SQLite. The application can be run as a web app or packaged as a standalone desktop application for Windows, macOS, and Linux.
 
@@ -18,7 +18,7 @@ A simple, responsive to-do list application built with Flask and SQLite. The app
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/flask-todo-app.git
+   git clone https://github.com/wandertechuniverse/2DoL1st.git
    cd flask-todo-app
    ```
 
