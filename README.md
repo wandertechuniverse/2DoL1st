@@ -215,4 +215,3 @@ SOFTWARE.
 - [PyWebView](https://pywebview.flowrl.com/) - Python library to build GUI for web applications
 - [PyInstaller](https://pyinstaller.org/) - Tool to package Python programs into standalone executables
 - [Font Awesome](https://fontawesome.com/) - Icons (if used)
-```
