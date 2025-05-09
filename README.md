@@ -19,7 +19,7 @@ A simple, responsive to-do list application built with Flask and SQLite. The app
 1. Clone the repository:
    ```
    git clone https://github.com/wandertechuniverse/2DoL1st.git
-   cd flask-todo-app
+   cd 2DoList
    ```
 
 2. Create a virtual environment and activate it:
