@@ -19,7 +19,7 @@ A simple, responsive to-do list application built with Flask and SQLite. The app
 1. Clone the repository:
    ```
    git clone https://github.com/wandertechuniverse/2DoL1st.git
-   cd 2DoList
+   cd 2DoL1st
    ```
 
 2. Create a virtual environment and activate it:
@@ -129,7 +129,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ```
 MIT License
 
-Copyright (c) 2023 To-Do List App
+Copyright (c) 2025 2DoL1st App
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
