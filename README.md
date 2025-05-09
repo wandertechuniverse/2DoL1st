@@ -1,133 +1,17 @@
-# To-Do List Application
-
-A simple, responsive to-do list application built with Flask and SQLite. The application can be run as a web app or packaged as a standalone desktop application for Windows, macOS, and Linux.
-
-## Features
-
-- Create, toggle, and delete tasks
-- Filter tasks by status (All, Active, Completed)
-- Responsive design that works on mobile and desktop
-- Persistent storage using SQLite database
-- Can be packaged as a standalone desktop application
-
-## Screenshots
-
-![To-Do List App](screenshots/todo-app.png)
-
-## Installation
-
-1. Clone the repository:
-   ```
-   git clone https://github.com/wandertechuniverse/2DoL1st.git
-   cd 2DoL1st
-   ```
-
-2. Create a virtual environment and activate it:
-   ```
-   python -m venv .venv
-   .venv\Scripts\activate  # On Windows
-   source .venv/bin/activate  # On macOS/Linux
-   ```
-
-3. Install the required packages:
-   ```
-   pip install -r requirements.txt
-   ```
-
-## Usage
-
-### Running as a Web Application
-
-1. Run the application:
-   ```
-   python app.py
-   ```
-
-2. Open your web browser and navigate to:
-   ```
-   http://127.0.0.1:5000/
-   ```
-
-### Building as a Desktop Application
-
-1. Install the required packages:
-   ```
-   pip install -r requirements.txt
-   ```
-
-2. Build the application:
-
-   **On Windows:**
-   ```
-   build_app.bat
-   ```
-
-   **On macOS/Linux:**
-   ```
-   chmod +x build_app.sh
-   ./build_app.sh
-   ```
-
-3. The standalone application will be available in the `dist/TodoApp` directory.
-
-4. To run the application:
-
-   **On Windows:**
-   - Navigate to `dist/TodoApp` and double-click on `TodoApp.exe`
-
-   **On macOS:**
-   - Navigate to `dist` and double-click on `TodoApp.app`
-
-   **On Linux:**
-   - Navigate to `dist/TodoApp` and run `./TodoApp`
-
-## Project Structure
-
-```
-flask-todo-app/
-├── app.py                  # Main application file
-├── desktop_app.py          # Simple desktop wrapper using webbrowser
-├── webview_app.py          # Advanced desktop wrapper using pywebview
-├── todo_app.spec           # PyInstaller specification file
-├── build_app.bat           # Windows build script
-├── build_app.sh            # macOS/Linux build script
-├── todo.db                 # SQLite database
-├── requirements.txt        # Project dependencies
-├── templates/              # HTML templates
-│   └── index.html          # Main template
-├── README.md               # Project documentation
-└── LICENSE                 # MIT License file
-```
-
-## How It Works
-
-### Web Application
-- The application uses Flask as the web framework
-- Data is stored in a SQLite database
-- The front-end is built with HTML, CSS, and minimal JavaScript
-- Tasks can be filtered by their completion status
-
-### Desktop Application
-- The desktop version uses PyWebView to create a native window
-- PyWebView embeds a web browser component to display the Flask application
-- PyInstaller packages everything into a standalone executable
-- The application runs a local Flask server and connects to it via the embedded browser
-- All data is stored locally in the SQLite database
-
-## Future Improvements
-
-- Add user authentication
-- Add due dates for tasks
-- Add categories/tags for tasks
-- Implement task search functionality
-- Add dark mode toggle
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-```
-MIT License
+To-Do List ApplicationA simple, responsive to-do list application built with Flask and SQLite. The application can be run as a web app or packaged as a standalone desktop application for Windows, macOS, and Linux.FeaturesCreate, toggle, and delete tasksFilter tasks by status (All, Active, Completed)Responsive design that works on mobile and desktopPersistent storage using SQLite databaseCan be packaged as a standalone desktop applicationScreenshotsInstallationClone the repository:       git clone https://github.com/wandertechuniverse/2DoL1st.git    cd 2DoL1st    Create a virtual environment and activate it:       python -m venv .venv    .venv\Scripts\activate  # On Windows    source .venv/bin/activate  # On macOS/Linux    Install the required packages:       pip install -r requirements.txt    UsageRunning as a Web ApplicationEnsure you have followed the installation steps.Run the application from the project root directory:       python app.py    Open your web browser and navigate to:       http://127.0.0.1:5000/    You should see the To-Do List interface. Add new tasks, toggle their completion status, and use the filter buttons.Building as a Desktop ApplicationEnsure you have followed the installation steps and installed PyInstaller (included in requirements.txt).Build the application using the appropriate script:   On Windows:   Open Command Prompt or PowerShell in the project root and run:       build_app.bat       On macOS/Linux:   Open Terminal in the project root, make the script executable, and run:       chmod +x build_app.sh    ./build_app.sh    3. The build process may take a few minutes. The standalone application will be created in the dist/TodoApp directory.To run the desktop application:   On Windows:   - Navigate to the dist/TodoApp folder and double-click on TodoApp.exe.   On macOS:   - Navigate to the dist folder and double-click on TodoApp.app. You might need to grant permissions the first time you run it.   On Linux:   - Navigate to the dist/TodoApp folder and run ./TodoApp in the terminal.Project Structureflask-todo-app/
+├── app.py                  # Main application file (Flask web server)
+├── desktop_app.py          # Simple desktop wrapper using webbrowser (less recommended for packaging)
+├── webview_app.py          # Advanced desktop wrapper using pywebview (used for PyInstaller build)
+├── todo_app.spec           # PyInstaller specification file
+├── build_app.bat           # Windows build script
+├── build_app.sh            # macOS/Linux build script
+├── todo.db                 # SQLite database (created on first run if not exists)
+├── requirements.txt        # Project dependencies
+├── templates/              # HTML templates
+│   └── index.html          # Main template for the UI
+├── README.md               # Project documentation
+└── LICENSE                 # MIT License file
+How It WorksWeb ApplicationThe application uses Flask as the web framework to handle requests and serve the front-end.Data is stored persistently in a local SQLite database file (todo.db).The front-end is built with HTML, CSS, and minimal JavaScript to provide a responsive user interface.Tasks can be filtered by their completion status (All, Active, Completed) using client-side logic or server-side routing.Desktop ApplicationThe desktop version primarily uses webview_app.py which leverages the pywebview library to create a native window.pywebview embeds a web browser component (using the native rendering engine of the OS) to display the Flask application running locally.PyInstaller is used to package the Flask application, the pywebview wrapper, the database, templates, and all dependencies into a single, standalone executable file or application bundle.When the desktop application is launched, it starts the Flask development server on a local port and then opens a pywebview window pointing to that local address.All data remains stored locally in the SQLite database file within the application's data directory.Troubleshooting"Flask command not found" or "python: No module named flask":Ensure you have activated your virtual environment (.venv\Scripts\activate or source .venv/bin/activate).Make sure you have installed the requirements: pip install -r requirements.txt.Database file (todo.db) not found:The todo.db file should be created automatically when the Flask app runs for the first time. Ensure the script has write permissions in the directory.If running the web app, make sure app.py is executed from the project root directory.If running the desktop app, the database will be created in the application's data directory (specific location varies by OS).Desktop application fails to build:Check the output of the build_app.bat or build_app.sh script for error messages.Common issues include missing dependencies (ensure pip install -r requirements.txt ran successfully) or permission problems.Ensure PyInstaller is installed: pip install pyinstaller.On Linux, you might need development headers for webkit or other dependencies depending on your distribution.Desktop application runs but shows a blank window or connection error:This usually means the Flask server failed to start correctly within the packaged application.Check the console output if running from the terminal (Linux/macOS) or look for logs if the build process created any.Ensure there are no port conflicts if other applications are running on the same port (default 5000).Issues with desktop application on macOS:You might encounter security warnings the first time you run the .app bundle. You might need to go to System Settings > Security & Privacy and allow the application to run.Ensure you have Xcode command line tools installed (xcode-select --install).Future ImprovementsAdd user authenticationAdd due dates for tasksAdd categories/tags for tasksImplement task search functionalityAdd dark mode toggleLicenseThis project is licensed under the MIT License - see the LICENSE file for details.MIT License
 
 Copyright (c) 2025 2DoL1st App
 
@@ -148,10 +32,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-```
-
-## Acknowledgements
-
-- Flask - Web framework
-- SQLite - Database
-- Font Awesome - Icons (if used)
+AcknowledgementsFlask - Web frameworkSQLite - DatabaseFont Awesome - Icons (if used)PyWebView - Desktop wrapperPyInstaller - Packaging tool
