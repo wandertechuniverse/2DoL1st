@@ -21,7 +21,7 @@ To get the application up and running, follow these steps:
 1.  **Clone the repository:**
     Open your terminal or command prompt and run:
     ```bash
-    git clone [https://github.com/wandertechuniverse/2DoL1st.git](https://github.com/wandertechuniverse/2DoL1st.git)
+    git clone https://github.com/wandertechuniverse/2DoL1st.git
     cd 2DoL1st
     ```
 
