@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask To-Do App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .form-container {
+            margin-bottom: 20px;
+        }
+        .todo-form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .todo-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+        }
+        .todo-button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        .todo-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .todo-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .todo-task {
+            flex-grow: 1;
+            text-decoration: none;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+        .todo-actions a {
+            margin-left: 10px;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        .complete-btn {
+            background-color: #2196F3;
+            color: white;
+        }
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            margin: 0 5px;
+            border-radius: 4px 4px 0 0;
+            text-decoration: none;
+            color: #333;
+        }
+        .tab.active {
+            background-color: #4CAF50;
+            color: white;
+            border: 1px solid #4CAF50;
+            border-bottom: none;
+        }
+        .empty-state {
+            text-align: center;
+            margin-top: 30px;
+            color: #888;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+        .footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My To-Do List</h1>
+        <div class="tabs">
+            <a href="{{ url_for('index') }}" class="tab {% if active_tab == 'all' %}active{% endif %}">All</a>
+            <a href="{{ url_for('active') }}" class="tab {% if active_tab == 'active' %}active{% endif %}">Active</a>
+            <a href="{{ url_for('completed') }}" class="tab {% if active_tab == 'completed' %}active{% endif %}">Completed</a>
+        </div>
+        <div class="form-container">
+            <form action="/add" method="POST" class="todo-form">
+                <input type="text" name="title" placeholder="Add a new task" class="todo-input" required>
+                <button type="submit" class="todo-button">Add</button>
+            </form>
+        </div>
+
+        {% if todo_list %}
+        <ul class="todo-list">
+            {% for todo in todo_list %}
+            <li class="todo-item {% if todo.complete %}completed{% endif %}">
+                <input type="checkbox"
+                       onchange="window.location.href='/update/{{ todo.id }}/{{ active_tab }}'"
+                       {% if todo.complete %}checked{% endif %}>
+                <span class="todo-task">{{ todo.title }}</span>
+                <div class="todo-actions">
+                    <a href="{{ url_for('update', todo_id=todo.id, redirect_to=active_tab) }}" class="complete-btn">Toggle</a>
+                    <a href="{{ url_for('delete', todo_id=todo.id, redirect_to=active_tab) }}" class="delete-btn">Delete</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <div class="empty-state">
+            {% if active_tab == 'all' %}
+                <p>You have no tasks. Add a new task to get started!</p>
+            {% elif active_tab == 'active' %}
+                <p>You have no active tasks. All tasks are completed!</p>
+            {% elif active_tab == 'completed' %}
+                <p>You have no completed tasks yet.</p>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="footer">
+            <p>To-Do List App &copy; 2025 | <a href="#" onclick="showAbout(); return false;">About</a></p>
+        </div>
+    </div>
+
+    <script>
+        function showAbout() {
+            alert('To-Do List App\n\nVersion 1.0.0\n\nThis application is licensed under the MIT License.\nSee the LICENSE file for details.');
+        }
+    </script>
+</body>
+</html>
