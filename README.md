@@ -1,6 +1,6 @@
 # Flask To-Do List Application
 
-A simple, responsive to-do list application built with Flask and SQLite. The application can be run as a web app or packaged as a standalone desktop application for Windows, macOS, and Linux.
+A simple, responsive to-do list application built with Flask and SQLite. The application can be run as a web app.
 
 ## Features
 
@@ -8,7 +8,6 @@ A simple, responsive to-do list application built with Flask and SQLite. The app
 - Filter tasks by status (All, Active, Completed)
 - Responsive design that works on mobile and desktop
 - Persistent storage using SQLite database
-- Can be packaged as a standalone desktop application
 
 ## Screenshots
 
@@ -26,7 +25,6 @@ A simple, responsive to-do list application built with Flask and SQLite. The app
    ```
    python -m venv .venv
    .venv\Scripts\activate  # On Windows
-   source .venv/bin/activate  # On macOS/Linux
    ```
 
 3. Install the required packages:
@@ -48,49 +46,12 @@ A simple, responsive to-do list application built with Flask and SQLite. The app
    http://127.0.0.1:5000/
    ```
 
-### Building as a Desktop Application
-
-1. Install the required packages:
-   ```
-   pip install -r requirements.txt
-   ```
-
-2. Build the application:
-
-   **On Windows:**
-   ```
-   build_app.bat
-   ```
-
-   **On macOS/Linux:**
-   ```
-   chmod +x build_app.sh
-   ./build_app.sh
-   ```
-
-3. The standalone application will be available in the `dist/TodoApp` directory.
-
-4. To run the application:
-
-   **On Windows:**
-   - Navigate to `dist/TodoApp` and double-click on `TodoApp.exe`
-
-   **On macOS:**
-   - Navigate to `dist` and double-click on `TodoApp.app`
-
-   **On Linux:**
-   - Navigate to `dist/TodoApp` and run `./TodoApp`
-
 ## Project Structure
 
 ```
 flask-todo-app/
 ├── app.py                  # Main application file
-├── desktop_app.py          # Simple desktop wrapper using webbrowser
-├── webview_app.py          # Advanced desktop wrapper using pywebview
 ├── todo_app.spec           # PyInstaller specification file
-├── build_app.bat           # Windows build script
-├── build_app.sh            # macOS/Linux build script
 ├── todo.db                 # SQLite database
 ├── requirements.txt        # Project dependencies
 ├── templates/              # HTML templates
@@ -106,13 +67,6 @@ flask-todo-app/
 - Data is stored in a SQLite database
 - The front-end is built with HTML, CSS, and minimal JavaScript
 - Tasks can be filtered by their completion status
-
-### Desktop Application
-- The desktop version uses PyWebView to create a native window
-- PyWebView embeds a web browser component to display the Flask application
-- PyInstaller packages everything into a standalone executable
-- The application runs a local Flask server and connects to it via the embedded browser
-- All data is stored locally in the SQLite database
 
 ## Future Improvements
 
@@ -155,3 +109,4 @@ SOFTWARE.
 - Flask - Web framework
 - SQLite - Database
 - Font Awesome - Icons (if used)
+````

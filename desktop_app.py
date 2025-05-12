@@ -9,7 +9,7 @@ from app import app
 
 def start_flask():
     """Start the Flask application on a specific port"""
-    app.run(host='127.0.0.1', port=5000, debug=False)
+    app.run(host='127.0.0.1', port=5000, debug=True)
 
 def check_server_started(url, timeout=10):
     """Check if the server has started by polling the URL"""

@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
-from datetime import datetime
 import os
 
 app = Flask(__name__)
@@ -72,76 +71,84 @@ class Todo:
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM todo WHERE id = ?", (todo_id,))
         row = cursor.fetchone()
-        if row:
-            todo = Todo(row['id'], row['title'], bool(row['complete']), row['created_at'])
-        else:
-            todo = None
+        todo = Todo(row['id'], row['title'], bool(row['complete']), row['created_at']) if row else None
         conn.close()
         return todo
 
     @staticmethod
     def add(title):
-        conn = sqlite3.connect(DB_PATH)
-        cursor = conn.cursor()
-        cursor.execute("INSERT INTO todo (title, complete) VALUES (?, ?)", (title, False))
-        conn.commit()
-        conn.close()
+        try:
+            conn = sqlite3.connect(DB_PATH)
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO todo (title, complete) VALUES (?, ?)", (title, int(False)))
+            conn.commit()
+        except sqlite3.Error as e:
+            print(f"Database error: {e}")
+        except Exception as e:
+            print(f"Unexpected error: {e}")
+        finally:
+            conn.close()
 
     @staticmethod
     def update_complete(todo_id, complete):
-        conn = sqlite3.connect(DB_PATH)
-        cursor = conn.cursor()
-        cursor.execute("UPDATE todo SET complete = ? WHERE id = ?", (complete, todo_id))
-        conn.commit()
-        conn.close()
+        try:
+            conn = sqlite3.connect(DB_PATH)
+            cursor = conn.cursor()
+            cursor.execute("UPDATE todo SET complete = ? WHERE id = ?", (int(complete), todo_id))
+            conn.commit()
+        except sqlite3.Error as e:
+            print(f"Database error: {e}")
+        except Exception as e:
+            print(f"Unexpected error: {e}")
+        finally:
+            conn.close()
 
     @staticmethod
     def delete(todo_id):
-        conn = sqlite3.connect(DB_PATH)
-        cursor = conn.cursor()
-        cursor.execute("DELETE FROM todo WHERE id = ?", (todo_id,))
-        conn.commit()
-        conn.close()
+        try:
+            conn = sqlite3.connect(DB_PATH)
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM todo WHERE id = ?", (todo_id,))
+            conn.commit()
+        except sqlite3.Error as e:
+            print(f"Database error: {e}")
+        except Exception as e:
+            print(f"Unexpected error: {e}")
+        finally:
+            conn.close()
 
 @app.route('/')
 @app.route('/all')
 def index():
-    """Render the main page with all to-do items"""
     todo_list = Todo.get_all()
     active_tab = 'all'
     return render_template('index.html', todo_list=todo_list, active_tab=active_tab)
 
 @app.route('/active')
 def active():
-    """Render the page with active (incomplete) to-do items"""
     todo_list = Todo.get_active()
     active_tab = 'active'
     return render_template('index.html', todo_list=todo_list, active_tab=active_tab)
 
 @app.route('/completed')
 def completed():
-    """Render the page with completed to-do items"""
     todo_list = Todo.get_completed()
     active_tab = 'completed'
     return render_template('index.html', todo_list=todo_list, active_tab=active_tab)
 
 @app.route('/add', methods=['POST'])
 def add():
-    """Add a new to-do item"""
     title = request.form.get('title')
-    if title:  # Only add if title is not empty
+    if title:
         Todo.add(title)
     return redirect(url_for('index'))
 
 @app.route('/update/<int:todo_id>')
 @app.route('/update/<int:todo_id>/<string:redirect_to>')
 def update(todo_id, redirect_to='all'):
-    """Toggle the completion status of a to-do item"""
     todo = Todo.get_by_id(todo_id)
     if todo:
         Todo.update_complete(todo_id, not todo.complete)
-
-    # Redirect to the appropriate tab
     if redirect_to == 'active':
         return redirect(url_for('active'))
     elif redirect_to == 'completed':
@@ -152,12 +159,9 @@ def update(todo_id, redirect_to='all'):
 @app.route('/delete/<int:todo_id>')
 @app.route('/delete/<int:todo_id>/<string:redirect_to>')
 def delete(todo_id, redirect_to='all'):
-    """Delete a to-do item"""
     todo = Todo.get_by_id(todo_id)
     if todo:
         Todo.delete(todo_id)
-
-    # Redirect to the appropriate tab
     if redirect_to == 'active':
         return redirect(url_for('active'))
     elif redirect_to == 'completed':

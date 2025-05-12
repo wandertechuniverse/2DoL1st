@@ -3,7 +3,7 @@
 block_cipher = None
 
 a = Analysis(
-    ['webview_app.py'],
+    ['app.py'],
     pathex=[],
     binaries=[],
     datas=[
@@ -51,15 +51,4 @@ coll = COLLECT(
     name='TodoApp',
 )
 
-# macOS specific
-app = BUNDLE(
-    coll,
-    name='TodoApp.app',
-    icon='icon.icns',  # You'll need to create or obtain a macOS icon file
-    bundle_identifier='com.yourdomain.todoapp',
-    info_plist={
-        'NSHighResolutionCapable': 'True',
-        'NSRequiresAquaSystemAppearance': 'False',
-        'CFBundleShortVersionString': '1.0.0',
-    },
-)
+# Removed macOS specific BUNDLE section
