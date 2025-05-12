@@ -1,4 +1,4 @@
-# To-Do List Application
+# Flask To-Do List Application
 
 A simple, responsive to-do list application built with Flask and SQLite. The application can be run as a web app.
 
@@ -8,87 +8,124 @@ A simple, responsive to-do list application built with Flask and SQLite. The app
 - Filter tasks by status (All, Active, Completed)
 - Responsive design that works on mobile and desktop
 - Persistent storage using SQLite database
+- Can be packaged as a standalone desktop application
 
 ## Screenshots
 
-![2DoL1st Home Page](https://raw.githubusercontent.com/wandertechuniverse/2DoL1st/refs/heads/master/2DoL1st%20Page.png)
-![2DoL1st Active Tasks](https://raw.githubusercontent.com/wandertechuniverse/2DoL1st/refs/heads/master/2DoL1st%20Active%20Page.png)
-![2DoL1st Completed Tasks](https://raw.githubusercontent.com/wandertechuniverse/2DoL1st/refs/heads/master/2DoL1st%20Completed%20Page.png)
+![To-Do List App](screenshots/todo-app.png)
 
 ## Installation
 
-To get the application up and running, follow these steps:
-
-1.  **Clone the repository:**
-    Open your terminal or command prompt and run:
-    ```bash
-    git clone https://github.com/wandertechuniverse/2DoL1st.git
-    cd 2DoL1st
-    ```
-
-2. Create a virtual environment and activate it:
-   ```bash
-   python -m venv .venv
-   .venv\Scripts\activate  # On Windows
+1. Clone the repository:
+   
+   ```
+   git clone https://github.com/yourusername/flask-todo-app.git
+   cd flask-todo-app
    ```
 
-3.  **Install the required packages:**
-    With the virtual environment activated, install the necessary libraries:
-    ```bash
-    pip install -r requirements.txt
-    ```
+2. Create a virtual environment and activate it:
+   
+   ```
+   python -m venv .venv
+   .venv\Scripts\activate  # On Windows
+   source .venv/bin/activate  # On macOS/Linux
+   ```
+
+3. Install the required packages:
+   
+   ```
+   pip install -r requirements.txt
+   ```
 
 ## Usage
 
 ### Running as a Web Application
 
-1.  **Ensure your virtual environment is active.** If not, activate it using the commands from the Installation section.
-2.  **Run the Flask application:**
-    ```bash
-    python app.py
-    ```
-3.  **Access the application:**
-    Open your web browser and navigate to:
-    ```
-    http://127.0.0.1:5000/
-    ```
+1. Run the application:
+   
+   ```
+   python app.py
+   ```
+
+2. Open your web browser and navigate to:
+   
+   ```
+   http://127.0.0.1:5000/
+   ```
+
+### Building as a Desktop Application
+
+1. Install the required packages:
+   
+   ```
+   pip install -r requirements.txt
+   ```
+
+2. Build the application:
+   
+   **On Windows:**
+   
+   ```
+   build_app.bat
+   ```
+   
+   **On macOS/Linux:**
+   
+   ```
+   chmod +x build_app.sh
+   ./build_app.sh
+   ```
+
+3. The standalone application will be available in the `dist/TodoApp` directory.
+
+4. To run the application:
+   
+   **On Windows:**
+   
+   - Navigate to `dist/TodoApp` and double-click on `TodoApp.exe`
+   
+   **On macOS:**
+   
+   - Navigate to `dist` and double-click on `TodoApp.app`
+   
+   **On Linux:**
+   
+   - Navigate to `dist/TodoApp` and run `./TodoApp`
 
 ## Project Structure
 
 ```
 flask-todo-app/
 ├── app.py                  # Main application file
+├── desktop_app.py          # Simple desktop wrapper using webbrowser
+├── webview_app.py          # Advanced desktop wrapper using pywebview
+├── todo_app.spec           # PyInstaller specification file
+├── build_app.bat           # Windows build script
+├── build_app.sh            # macOS/Linux build script
 ├── todo.db                 # SQLite database
 ├── requirements.txt        # Project dependencies
 ├── templates/              # HTML templates
 │   └── index.html          # Main template
-├── README.md              # Project documentation
-└── LICENSE                # MIT License file
+├── README.md               # Project documentation
+└── LICENSE                 # MIT License file
 ```
 
 ## How It Works
 
 ### Web Application
+
 - The application uses Flask as the web framework
 - Data is stored in a SQLite database
 - The front-end is built with HTML, CSS, and minimal JavaScript
 - Tasks can be filtered by their completion status
 
-## Troubleshooting
+### Desktop Application
 
-Encountering issues? Here are some common problems and solutions:
-
-* **`python: command not found` or `pip: command not found`**:
-    * Ensure Python is installed and in your system's PATH
-    * Verify by running `python --version`
-
-* **Virtual environment issues**:
-    * Double-check activation command: `.venv\Scripts\activate`
-    * Ensure you're in the correct directory
-
-* **Database errors**:
-    * The `todo.db` file is created automatically on first run
-    * Ensure write permissions in the application directory
+- The desktop version uses PyWebView to create a native window
+- PyWebView embeds a web browser component to display the Flask application
+- PyInstaller packages everything into a standalone executable
+- The application runs a local Flask server and connects to it via the embedded browser
+- All data is stored locally in the SQLite database
 
 ## Future Improvements
 
@@ -101,6 +138,30 @@ Encountering issues? Here are some common problems and solutions:
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+```
+MIT License
+
+Copyright (c) 2025 To-Do List App
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
 
 ## Acknowledgements
 
