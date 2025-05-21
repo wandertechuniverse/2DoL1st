@@ -12,7 +12,20 @@ A simple, responsive to-do list application built with Flask and SQLite. The app
 
 ## Screenshots
 
-![To-Do List App](screenshots/todo-app.png)
+### Flask Web Application
+![To-Do List App - Web Version](screenshots/todo-app.png)
+
+### Qt Desktop Application
+The following screenshots are for the `desktop_qt_app.py` application.
+
+![Main View](2DoL1st%20Page.png)
+*Main view of the Qt desktop application showing all tasks.*
+
+![Active Tasks](2DoL1st%20Active%20Page.png)
+*View showing only active tasks in the Qt desktop application.*
+
+![Completed Tasks](2DoL1st%20Completed%20Page.png)
+*View showing only completed tasks in the Qt desktop application.*
 
 ## Installation
 
