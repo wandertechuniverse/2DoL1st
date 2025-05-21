@@ -69,14 +69,12 @@ The primary dependency for the desktop application is:
 -   `Pillow` (for creating the placeholder tray icon, optional if you provide your own)
 
 **Running the Desktop Application:**
-1.  Ensure you have Python installed.
-2.  Clone the repository (if you haven't already).
-3.  Navigate to the project directory.
-4.  Install the required dependencies:
+First, ensure you have cloned the repository and navigated into its main directory (e.g., `2DoL1st` if you used the default clone name).
+1.  Install the required dependencies:
     ```bash
     pip install -r requirements.txt
     ```
-5.  Run the application:
+2.  Run the application:
     ```bash
     python desktop_qt_app.py
     ```
@@ -206,3 +204,5 @@ SOFTWARE.
 - Flask - Web framework
 - SQLite - Database
 - Font Awesome - Icons (if used)
+
+© 2025 2DoL1st
