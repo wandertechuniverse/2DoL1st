@@ -53,7 +53,39 @@ A simple, responsive to-do list application built with Flask and SQLite. The app
    http://127.0.0.1:5000/
    ```
 
-### Building as a Desktop Application
+## Desktop Application (`desktop_qt_app.py`)
+
+This project also includes a native desktop To-Do List application built using Python and the Qt framework with the PySide6 bindings.
+
+**Key Features:**
+-   **Full To-Do Management**: Create, edit, delete, and mark tasks as complete or active.
+-   **Task Filtering**: View all, active, or completed tasks.
+-   **Native Notifications**: Receive system notifications when tasks are added or completed.
+-   **System Tray Integration**: The application can minimize to the system tray and provides quick actions (show app, quit) from the tray icon menu.
+
+**Dependencies:**
+The primary dependency for the desktop application is:
+-   `PySide6` (for the Qt GUI framework)
+-   `Pillow` (for creating the placeholder tray icon, optional if you provide your own)
+
+**Running the Desktop Application:**
+1.  Ensure you have Python installed.
+2.  Clone the repository (if you haven't already).
+3.  Navigate to the project directory.
+4.  Install the required dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+5.  Run the application:
+    ```bash
+    python desktop_qt_app.py
+    ```
+    The application window should appear. If you have a compatible system tray, an icon will appear there.
+
+**Manual Testing:**
+For detailed steps on how to manually test all features of the desktop application, please refer to the `MANUAL_TESTING_CHECKLIST.md` file in this repository.
+
+### Original Flask Web App - Building as a Desktop Application (Legacy PyWebView version)
 
 1. Install the required packages:
    
@@ -96,18 +128,24 @@ A simple, responsive to-do list application built with Flask and SQLite. The app
 
 ```
 flask-todo-app/
-├── app.py                  # Main application file
-├── desktop_app.py          # Simple desktop wrapper using webbrowser
-├── webview_app.py          # Advanced desktop wrapper using pywebview
-├── todo_app.spec           # PyInstaller specification file
-├── build_app.bat           # Windows build script
-├── build_app.sh            # macOS/Linux build script
-├── todo.db                 # SQLite database
-├── requirements.txt        # Project dependencies
-├── templates/              # HTML templates
-│   └── index.html          # Main template
+├── app.py                  # Main Flask web application file
+├── data_manager.py         # Handles database interactions for both apps
+├── desktop_qt_app.py       # Qt-based desktop application
+├── MANUAL_TESTING_CHECKLIST.md # Checklist for testing desktop_qt_app.py
+├── PACKAGING_NOTES.md      # Notes on packaging the Qt desktop application
+├── tray_icon.png           # Placeholder icon for system tray
+├── todo.db                 # SQLite database (shared by both apps)
+├── requirements.txt        # Project dependencies (for both apps)
+├── templates/              # HTML templates (for Flask app)
+│   └── index.html          # Main template for Flask app
 ├── README.md               # Project documentation
 └── LICENSE                 # MIT License file
+# Older files for PyWebView desktop app (may be outdated or removed):
+# desktop_app.py
+# webview_app.py
+# todo_app.spec
+# build_app.bat
+# build_app.sh
 ```
 
 ## How It Works
